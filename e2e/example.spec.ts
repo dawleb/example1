@@ -1,18 +1,16 @@
 import { test, expect } from '@playwright/test';
 
-test('has title', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
+test('should successfully log in', async ({ page }) => {
+  // Navigate to the page.
+  await page.goto('https://practicetestautomation.com/practice-test-login/');
+  
+  // Provide user credentials.
+  await page.fill('#username', "student")
+  await page.fill('#password', "Password123");
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Playwright/);
-});
+  // Click the login button.
+  await page.click('#submit');
 
-test('get started link', async ({ page }) => {
-  await page.goto('https://playwright.dev/');
-
-  // Click the get started link.
-  await page.getByRole('link', { name: 'Get started' }).click();
-
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+  // Expect a title to contain a substring.
+  await expect(page).toHaveTitle(/Logged In Successfully/);
 });
